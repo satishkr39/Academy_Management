@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome{% endblock %}Welcome Page</title>
+</head>
+<body>
+  {% block content %}
+    <h2> Welcome To Merchant Navy Page,</h2>
+    <p> Your role is {{ role }}</p>
+
+    {% if role =='Teacher' %}
+        <button type="button" class="btn btn-primary"><a href="{{ url_for('course.add_course') }}"> Click to add course </a> </button>
+    {% endif %}
+
+  {% endblock %}
+</body>
+</html>

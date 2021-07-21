@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Home Page{% endblock %}</title>
+</head>
+<body>
+
+    {% block content %}
+    <h1> Home Page</h1>
+    <p>
+    {% for items in get_flashed_messages() %}
+        {{ item }}
+    {% endfor %}
+    </p>
+    {% endblock %}
+</body>
+</html>

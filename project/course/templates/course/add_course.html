@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Add Course{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+        <h1> Welcome to Add Course Page </h1>
+        <div class="container">
+            <form method="POST">
+                {{ form.csrf_token() }}
+                {{ form.hidden_tag() }}
+                {{ form.course_name.label }} {{ form.course_name}} <br>
+                {{ form.course_fee.label }} {{ form.course_fee }} <br>
+                {{ form.course_duration.label }} {{ form.course_duration }} <br>
+                {{ form.course_creation.label }} {{ form.course_creation}} <br>
+                {{ form.submit() }}
+            </form>
+        </div>
+    {% endblock %}
+</body>
+</html>
