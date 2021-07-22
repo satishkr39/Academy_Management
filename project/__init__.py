@@ -10,7 +10,8 @@ app = Flask(__name__)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'user.login'  # this is to redirect user to login page when they try
+                                        # to access any page which they are not authorized
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -31,6 +32,8 @@ def index():
 # import all the blueprints down here
 from project.users.views import user_blueprint
 from project.course.views import course_blueprint
+from project.error_pages.views import error_blueprint
 
+app.register_blueprint(error_blueprint)
 app.register_blueprint(course_blueprint)
 app.register_blueprint(user_blueprint)

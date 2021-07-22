@@ -9,3 +9,7 @@ class AddCourseForm(FlaskForm, UserMixin):
     course_duration = IntegerField("Enter the course duration in hours: ", validators=[DataRequired()])
     course_creation = DateField("Enter the date created for course: ",format='%m/%d/%Y', validators=[DataRequired()])
     submit = SubmitField("Create Course")
+
+class DeleteCourseForm(FlaskForm, UserMixin):
+    course_id = IntegerField("Enter the course id to be deleted")
+    submit = SubmitField("Delete the course")

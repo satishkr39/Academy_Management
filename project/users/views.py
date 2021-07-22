@@ -2,7 +2,7 @@ from project import app, db
 from project.models import User
 from flask import Blueprint, flash, render_template, url_for, redirect, request, abort
 from project.users.forms import RegisterForm, LoginForm
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
 
 user_blueprint = Blueprint('user', __name__, template_folder='templates/users')
@@ -56,6 +56,19 @@ def login():
 @user_blueprint.route('/update')
 def update():
     pass
+
+
+# welcome page
+@login_required
+@user_blueprint.route('/welcome')
+def welcome():
+    if current_user.is_authenticated:
+        role = current_user.role
+        username = current_user.username
+        print("Inside Welcome MEthod", role)
+        return render_template('welcome.html', role=role, username=username)
+    else:
+        abort(403)
 
 # logout user
 @login_required
