@@ -13,3 +13,10 @@ class AddCourseForm(FlaskForm, UserMixin):
 class DeleteCourseForm(FlaskForm, UserMixin):
     course_id = IntegerField("Enter the course id to be deleted")
     submit = SubmitField("Delete the course")
+
+
+class UpdateCourseForm(FlaskForm, UserMixin):
+    course_name = StringField("Enter the new course name")
+    course_fee = IntegerField("Enter the new revised course fees")
+    course_duration = IntegerField("Enter the new revised duration: ")
+    submit = SubmitField("Update Course")

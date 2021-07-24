@@ -21,7 +21,8 @@
     <div class="badge bg-primary text-wrap" style="width: 50rem;">
         <p>{{item}}</p></div>
     {% endfor %}
-
+    <!-- this section will only appears when the trainer navigates from delete page button -->
+    {% if condition %}
     <h2 align="center"> View all your course for Trainer {{ current_user.username }} </h2>
     <table class="table table-dark table-hover">
         <thead>
@@ -45,7 +46,44 @@
         {% endfor %}
         </tbody>
     </table>
-    {% endblock %}
+
+    {% else %}
+
+    <!-- this section will display the course in pagination format -->
+    <div class="container">
+        <h3> Please find below list of all your courses available on platform </h3>
+        {# Go through each blog post #}
+        {% for course in course.items %}
+        <div class="card">
+            <div class="card-body">
+                <h2><a class="card-title" href="#">{{ course.course_name }}</a></h2>
+                <a href="#">Written By: {{ course.course_instructor }}</a>
+                <p>Published on: {{ course.course_created.strftime('%Y-%m-%d') }}</p>
+                <a href="{{ url_for('course.update_course', course_id=course.course_id) }}" class="btn btn-primary">Update Course</a>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Page number footer -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% for page_num in course.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if course.page == page_num %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="{{ url_for('course.view_course', page=page_num) }}">{{ page_num }}</a>
+                </li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('course.view_course', page=page_num) }}">{{ page_num
+                    }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+
+        {% endif %}
+        {% endblock %}
+
+    </div>
 </div>
 </body>
 </html>

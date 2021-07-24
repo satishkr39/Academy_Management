@@ -1,10 +1,22 @@
 <!DOCTYPE html>
+{% extends "base.html" %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %} Update Page {% endblock %}</title>
 </head>
 <body>
-
+{% block content %}
+<div class="container">
+<h2> welcome to Update course page</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.course_name.label }} {{ form.course_name }}<br>
+    {{ form.course_fee.label }} {{ form.course_fee }}<br>
+    {{ form.course_duration.label }} {{ form.course_duration }}<br>
+    {{ form.submit }}
+</form>
+    </div>
+{% endblock %}
 </body>
 </html>
