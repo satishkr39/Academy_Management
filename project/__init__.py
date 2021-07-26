@@ -33,7 +33,10 @@ def index():
 from project.users.views import user_blueprint
 from project.course.views import course_blueprint
 from project.error_pages.views import error_blueprint
+from project.student.view import student_blueprint
+
 
 app.register_blueprint(error_blueprint)
 app.register_blueprint(course_blueprint)
 app.register_blueprint(user_blueprint)
+app.register_blueprint(student_blueprint)

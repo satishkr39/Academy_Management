@@ -6,6 +6,7 @@ from project.models import Course, User
 
 course_blueprint = Blueprint('course', __name__, template_folder='templates/course')
 
+
 # Add New course by trainer
 @course_blueprint.route('/add_course', methods=['POST', 'GET'])
 @login_required
@@ -22,7 +23,7 @@ def add_course():
             print(course_creation)
             course_instructor = current_user.username  # using UserMixin to get the current user details
             course_add = Course(course_name=course_name, course_instructor=course_instructor,
-                                        course_fee=course_fee, course_created=course_creation, course_duration=course_duration)
+                                course_fee=course_fee, course_created=course_creation, course_duration=course_duration)
             print(course_add)
             db.session.add(course_add)
             db.session.commit()
@@ -30,6 +31,7 @@ def add_course():
         return render_template('add_course.html', form=form)
     else:
         abort(403)
+
 
 # delete course
 @course_blueprint.route('/delete', methods=['POST', 'GET'])
@@ -52,10 +54,10 @@ def delete_course():
             print(course_to_delete)
             db.session.delete(course_to_delete)
             db.session.commit()
-            deleted_mess = "Course ID deleted is: "+ str(course_id)
+            deleted_mess = "Course ID deleted is: " + str(course_id)
             flash(deleted_mess)
             return redirect(url_for('course.view_course'))
-        return render_template('view_course.html',form=form, course=all_course,condition=session['condition'])
+        return render_template('view_course.html', form=form, course=all_course, condition=session['condition'])
     else:
         abort(403)
 
@@ -82,18 +84,19 @@ def update_course(course_id):
         update_form.course_name.data = course_details.course_name  # pre-fill the course_name
         update_form.course_fee.data = course_details.course_fee  # pre-fill the course fee
         update_form.course_duration.data = course_details.course_duration  # pre-fill the course duration
-        return  render_template('update_course.html', form=update_form)
-
+        return render_template('update_course.html', form=update_form)
 
 
 # view all course and will be filtered by trainer
 @course_blueprint.route('/view_course')
 @login_required
 def view_course():
+    print("Inside Trainer View Course")
     session['condition'] = False
     if current_user.is_authenticated:
         page = request.args.get('page', 1, type=int)
-        all_course = Course.query.filter_by(course_instructor=current_user.username).order_by(Course.course_created.desc()).paginate(page=page, per_page=3)
+        all_course = Course.query.filter_by(course_instructor=current_user.username).order_by(
+            Course.course_created.desc()).paginate(page=page, per_page=3)
         '''for page_num in all_course.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2):
             print("Iter Pages: ", page_num)
         print("All course Page: ", all_course.page)'''  # since all course is pagination object, so page attribute got appended to it

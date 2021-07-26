@@ -53,3 +53,18 @@ class Course(db.Model):
     def __repr__(self):
         return f"The course name is {self.course_name}, instructor name is {self.course_instructor}, " \
                f"fee is {self.course_fee}, created on {self.course_created}, duration is {self.course_duration}"
+
+
+class Student(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    s_course_id = db.Column(db.Integer, db.ForeignKey('course.course_id'), nullable=False)
+    date_enrolled = db.Column(db.DateTime, nullable=False, default= datetime.utcnow)
+
+    def __init__(self, user_id, s_course_id, date_enrolled):
+        self.user_id = user_id
+        self.s_course_id = s_course_id
+        self.date_enrolled = date_enrolled
+
+    def __repr__(self):
+        return f"The user is is {self.user_id}, course_id is {self.s_course_id} and date enrolled is {self.date_enrolled}"

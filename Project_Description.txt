@@ -1,0 +1,32 @@
+=========  ACADEMY MANAGEMENT SYSTEM =========
+
+The application is developed in python flask framework. the various libraries used are listed in the requirements.txt
+file.
+
+Major Libraries are -- Flask, wtforms, sqlalchemy, flask-login, etc.
+
+The Application has 2 major components : 1. Student 2. Trainer
+
+=========  TRAINER =========
+1. Each trainer can perform the following functions
+    a. create course
+    b. delete course
+    c. update course
+    d. view their own courses
+
+========= STUDENT =========
+2. Each student can perform the following functions
+    a. View all courses for all the trainers
+    b. Enroll in courses
+    c. view course in which they are enrolled
+
+========= USERS =========
+Each user can perform the following functions
+    a. create new account
+    b. login
+    c. update their account (yet to be implemented)
+
+========= TABLE DESCRIPTION =========
+1. User : (id, name, role, username, user_email, user_password)
+2. course : (course_id, course_name, course_instructor, course_fee, course_created, course_duration)
+3. student : (id(User.id), course_id(course.course_id), enrolled_on)

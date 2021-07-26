@@ -14,9 +14,11 @@
         <button type="button" class="btn btn-info"><a href="{{ url_for('course.add_course') }}"> Click to add course </a> </button>
 
         <button type="button" class="btn btn-info"><a href="{{ url_for('course.delete_course') }}"> Delete course </a> </button>
-    {% endif %}
 
-    <button type="button" class="btn btn-info"><a href="{{ url_for('course.view_course') }}"> Click to View All Course </a> </button>
+        <button type="button" class="btn btn-info"><a href="{{ url_for('course.view_course') }}"> Click to View All Course(T) </a> </button>
+    {% else %}
+        <button type="button" class="btn btn-info"><a href="{{ url_for('student.student_view_course') }}"> Click to View All Course </a> </button>
+    {% endif %}
 
   {% endblock %}
 </body>
