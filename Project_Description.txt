@@ -20,6 +20,8 @@ The Application has 2 major components : 1. Student 2. Trainer
     b. Enroll in courses
     c. view course in which they are enrolled
 
+    -b- A user can enroll in a course only once. if they try to enroll in the same course again then throw error.
+
 ========= USERS =========
 Each user can perform the following functions
     a. create new account

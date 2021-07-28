@@ -23,7 +23,7 @@
                 <h2><a class="card-title" href="#">{{ course.course_name }}</a></h2>
                 <a href="#">Written By: {{ course.course_instructor }}</a>
                 <p>Published on: {{ course.course_created.strftime('%Y-%m-%d') }}</p>
-                <a href="#" class="btn btn-primary">Enroll Course</a>
+                <a href="{{ url_for('student.enroll_course', course_id=course.course_id) }}" class="btn btn-primary">Enroll Course</a>
             </div>
         </div>
         {% endfor %}

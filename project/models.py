@@ -56,6 +56,7 @@ class Course(db.Model):
 
 
 class Student(db.Model):
+    __tablename__ = 'student_course'
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     s_course_id = db.Column(db.Integer, db.ForeignKey('course.course_id'), nullable=False)
