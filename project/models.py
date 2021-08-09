@@ -3,7 +3,6 @@ from datetime import datetime
 from project import login_manager, app, db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from wtforms.validators import ValidationError
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -19,6 +18,8 @@ class User(db.Model, UserMixin):
     user_password = db.Column(db.String(40), index=True)
     # a teacher can have multiple course
     course = db.relationship('Course', backref='user_ref', lazy='dynamic')
+    # a user can have multiple course
+    student_user = db.relationship('Student', backref='s_user', lazy='dynamic')
 
     def __init__(self, name, role, username, user_email, user_password):
         self.name = name
@@ -28,7 +29,7 @@ class User(db.Model, UserMixin):
         self.user_password = generate_password_hash(password=user_password)
 
     def __repr__(self):
-        return f"The username is {self.username} and email is {self.user_email}"
+        return f"The username is {self.username} and email is {self.user_email} and course is {self.student_user}"
 
     def validate_password(self, password):
         return check_password_hash(self.user_password, password=password)
@@ -42,6 +43,8 @@ class Course(db.Model):
     course_fee = db.Column(db.Integer)
     course_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     course_duration = db.Column(db.Integer, nullable=False)
+    # linking course to student_course table
+    course_student = db.relationship('Student', backref='s_course', lazy='select')
 
     def __init__(self, course_name, course_instructor, course_fee, course_created, course_duration):
         self.course_name = course_name
@@ -67,5 +70,12 @@ class Student(db.Model):
         self.s_course_id = s_course_id
         self.date_enrolled = date_enrolled
 
+    '''def __repr__(self):
+        return f"The user is {self.user_id}, course_id is {self.s_course_id} and date enrolled is {self.date_enrolled}"
+    '''
+    # json representation of repr
     def __repr__(self):
-        return f"The user is is {self.user_id}, course_id is {self.s_course_id} and date enrolled is {self.date_enrolled}"
+        return f"The user is {self.user_id}, course_id is {self.s_course_id} and date enrolled is {self.date_enrolled}"
+
+    def json(self):
+        return {'user_id': self.user_id, 's_course_id':self.s_course_id, 'date_enrolled':self.date_enrolled}

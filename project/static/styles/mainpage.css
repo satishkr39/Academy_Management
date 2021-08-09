@@ -211,3 +211,9 @@ label_c {
 .loginbttm {
     padding: 0px;
 }
+
+
+#ship{
+  max-width: 100%;
+  height: 500px;
+}

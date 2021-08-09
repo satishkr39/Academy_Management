@@ -17,7 +17,9 @@
 
         <button type="button" class="btn btn-info"><a href="{{ url_for('course.view_course') }}"> Click to View All Course(T) </a> </button>
     {% else %}
-        <button type="button" class="btn btn-info"><a href="{{ url_for('student.student_view_course') }}"> Click to View All Course </a> </button>
+        <button type="button" class="btn btn-info"><a href="{{ url_for('student.student_view_course') }}"> Click to Enroll In Course </a> </button>
+
+        <button type="button" class="btn btn-info"><a href="{{ url_for('student.view_enrolled_course') }}"> Click to View Enrolled Course </a> </button>
     {% endif %}
 
   {% endblock %}

@@ -4,7 +4,7 @@ from flask_login import login_manager, login_required, current_user
 from project.models import User, Course, Student
 from datetime import datetime
 student_blueprint = Blueprint('student', __name__, template_folder='templates/student')
-
+import json
 
 # view all courses irrespective of trainers
 @student_blueprint.route('/student_view_course')
@@ -41,5 +41,24 @@ def enroll_course():
 @login_required
 def view_enrolled_course():
     print("Inside View Enrolled Course")
-
-
+    # creating list to store all course name, fee, id and duration and then pass to html
+    course_name= []
+    course_id= []
+    course_fees= []
+    course_duration =[]
+    course_created_on = []
+    all_course = Student.query.filter_by(user_id=current_user.id).all()  # gets the details on student id
+    print(all_course)
+    for item in all_course:  # iterates over all item to get the each course details
+        print(str(item.s_course))
+        course_name.append(item.s_course.course_name)
+        course_id.append(item.s_course.course_id)
+        course_fees.append(item.s_course.course_fee)
+        course_duration.append(item.s_course.course_duration)
+        course_created_on.append(item.s_course.course_created)
+    print(course_name)
+    print(course_id)
+    print(course_duration)
+    return render_template('view_enrolled_course.html', length=len(course_id),course_name=course_name,
+                           course_id=course_id, course_duration=course_duration, course_fees=course_fees,
+                           course_created_on=course_created_on)

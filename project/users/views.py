@@ -1,9 +1,9 @@
 from project import app, db
 from project.models import User
 from flask import Blueprint, flash, render_template, url_for, redirect, request, abort
-from project.users.forms import RegisterForm, LoginForm
+from project.users.forms import RegisterForm, LoginForm, UpdateUserForm
 from flask_login import login_user, logout_user, login_required, current_user
-
+from werkzeug.security import generate_password_hash
 
 user_blueprint = Blueprint('user', __name__, template_folder='templates/users')
 
@@ -53,9 +53,24 @@ def login():
 
 # method to update username, email, password
 @login_required
-@user_blueprint.route('/update')
+@user_blueprint.route('/update', methods=['GET', 'POST'])
 def update():
-    pass
+    update_form = UpdateUserForm()
+    user = User.query.get_or_404(current_user.id)
+    if update_form.validate_on_submit():
+        print("inside validate method")
+        user.username = update_form.username.data
+        user.user_email = update_form.email.data
+        user.user_password = generate_password_hash(update_form.password.data)  # store the secured hash password in db
+        db.session.commit()
+        flash("Your account has been updated")
+        return render_template('home.html')
+    elif request.method =='GET':
+        print("Inside GET Method")
+        update_form.username.data = user.username
+        update_form.email.data = user.user_email
+        update_form.password.data = user.user_password
+        return render_template('user_update.html', form=update_form)
 
 
 # welcome page
