@@ -6,22 +6,63 @@
     <title>{% block title %}Welcome{% endblock %}Welcome Page</title>
 </head>
 <body>
-  {% block content %}
-    <h2> Welcome to {{ username }}  Home Page,</h2>
-    <p> Your role is {{ role }}</p>
+{% block content %}
+<h2> Welcome to {{ username }} Home Page,</h2>
+<p> Your role is {{ role }}</p>
+<!-- CARD STYLING -->
+<div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+    <div class="row">
+        {% if role =='Teacher' %}
+        <div class="column">
+            <div class="card">
+                <h3>Add Course Section</h3>
+                <p>Want to add a new course for students? Please click on add course button</p>
+                <button type="button" class="btn btn-info"><a href="{{ url_for('course.add_course') }}"> Click to add
+                    course </a>
+                </button>
+            </div>
+        </div>
 
-    {% if role =='Teacher' %}
-        <button type="button" class="btn btn-info"><a href="{{ url_for('course.add_course') }}"> Click to add course </a> </button>
+        <div class="column">
+            <div class="card">
+                <h3>Delete Course Section</h3>
+                <p>Course once deleted won't be available for students</p>
+                <button type="button" class="btn btn-info"><a href="{{ url_for('course.delete_course') }}"> Delete
+                    course </a></button>
+            </div>
+        </div>
 
-        <button type="button" class="btn btn-info"><a href="{{ url_for('course.delete_course') }}"> Delete course </a> </button>
-
-        <button type="button" class="btn btn-info"><a href="{{ url_for('course.view_course') }}"> Click to View All Course(T) </a> </button>
-    {% else %}
-        <button type="button" class="btn btn-info"><a href="{{ url_for('student.student_view_course') }}"> Click to Enroll In Course </a> </button>
-
-        <button type="button" class="btn btn-info"><a href="{{ url_for('student.view_enrolled_course') }}"> Click to View Enrolled Course </a> </button>
-    {% endif %}
-
-  {% endblock %}
+        <div class="column">
+            <div class="card">
+                <h3>View All Your Course</h3>
+                <p>Shows all the course available on the platform created by you.</p>
+                <button type="button" class="btn btn-info"><a href="{{ url_for('course.view_course') }}"> Click to View
+                    All
+                    Course(T) </a></button>
+            </div>
+        </div>
+        {% else %}
+        <div class="column">
+            <div class="card">
+                <h3>Enroll Course</h3>
+                <p>Want to Enroll in new course? Go Ahead and Start your learning journey</p>
+                <button type="button" class="btn btn-info"><a href="{{ url_for('student.student_view_course') }}"> Click
+                    to
+                    Enroll In
+                    Course </a></button>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <h3>View Enrolled Courses</h3>
+                <p>View your learning journey</p>
+                <button type="button" class="btn btn-info"><a href="{{ url_for('student.view_enrolled_course') }}">
+                    Click to View Enrolled Course </a></button>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
 </body>
 </html>

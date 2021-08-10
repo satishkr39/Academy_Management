@@ -11,6 +11,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 </head>
 <body>
 
@@ -27,14 +28,15 @@
                 {% if current_user.is_authenticated %}
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ url_for('user.update') }}">Account Update</a>
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('user.update') }}">Account
+                        Update</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Browse Course</a>
                 </li>
 
-                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ url_for('user.logout') }}">Logout</a>
                 </li>
 
@@ -44,7 +46,7 @@
 
                 {% else %}
 
-                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ url_for('user.register') }}">Register</a>
                 </li>
 
@@ -56,9 +58,28 @@
         </div>
     </div>
 </nav>
-
 {% block content %}
 
 {% endblock %}
+
+<!--- footer section -->
+<div class="footer-basic">
+    <footer>
+        <div class="social">
+            <a href="#"><i class="icon ion-social-instagram"></i></a>
+            <a href="#"><i class="icon ion-social-snapchat"></i></a>
+            <a href="#"><i class="icon ion-social-twitter"></i></a>
+            <a href="#"><i class="icon ion-social-facebook"></i></a>
+        </div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">Merchant Navy Course © 2021</p>
+    </footer>
+</div>
 </body>
 </html>

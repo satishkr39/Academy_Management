@@ -1,6 +1,6 @@
 from project import app, db
 from project.models import User
-from flask import Blueprint, flash, render_template, url_for, redirect, request, abort
+from flask import Blueprint, flash, render_template, url_for, redirect, request, abort, session
 from project.users.forms import RegisterForm, LoginForm, UpdateUserForm
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash
@@ -43,6 +43,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user is not None and user.validate_password(password):
             login_user(user)
+            session.permanent = True
             print("Logged IN")
             role = user.role  # sending the role to welcome page
             return render_template('welcome.html', role=role)
