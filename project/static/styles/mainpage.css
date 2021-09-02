@@ -320,3 +320,10 @@ label_c {
   text-align: center;
   background-color: #b3ffd9;
 }
+
+/* name role box */
+#custom_name_role{
+    position: relative;
+    left: 1400px;
+    top: 10px;
+}

@@ -7,8 +7,10 @@
 </head>
 <body>
 {% block content %}
-<h2> Welcome to {{ username }} Home Page,</h2>
-<p> Your role is {{ role }}</p>
+<span id="custom_name_role">
+<h2> {{ user }} Page,</h2>
+<p class="badge bg-warning text-dark"> Your role is {{ role }}</p>
+</span>
 <!-- CARD STYLING -->
 <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
     <div class="row">

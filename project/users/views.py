@@ -46,7 +46,7 @@ def login():
             session.permanent = True
             print("Logged IN")
             role = user.role  # sending the role to welcome page
-            return render_template('welcome.html', role=role)
+            return render_template('welcome.html', role=role, user=user.username)
         else:
             flash("Invalid username or password")
             return redirect(url_for('user.login'))
@@ -82,7 +82,7 @@ def welcome():
         role = current_user.role
         username = current_user.username
         print("Inside Welcome MEthod", role)
-        return render_template('welcome.html', role=role, username=username)
+        return render_template('welcome.html', role=role, user=username)
     else:
         abort(403)
 
