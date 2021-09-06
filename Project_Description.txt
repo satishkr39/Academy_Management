@@ -5,7 +5,10 @@ file.
 
 Major Libraries are -- Flask, wtforms, sqlalchemy, flask-login, etc.
 
-The Application has 2 major components : 1. Student 2. Trainer
+The Application has 3 major components :
+    1. Student
+    2. Trainer
+    3. Admin
 
 =========  TRAINER =========
 1. Each trainer can perform the following functions
@@ -21,6 +24,12 @@ The Application has 2 major components : 1. Student 2. Trainer
     c. view course in which they are enrolled
 
     -b- A Student can enroll in a course only once. if they try to enroll in the same course again then throw error.
+
+========= ADMIN =========
+3. Each admin can perform the following function
+    a. View all users
+    b. update any users details
+    c. update/delete any course details
 
 ========= USERS =========
 Each user can perform the following functions
