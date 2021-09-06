@@ -43,7 +43,8 @@
                     Course(T) </a></button>
             </div>
         </div>
-        {% else %}
+        {% endif %}
+        {% if role=='student' %}
         <div class="column">
             <div class="card">
                 <h3>Enroll Course</h3>
@@ -60,6 +61,37 @@
                 <p>View your learning journey</p>
                 <button type="button" class="btn btn-info"><a href="{{ url_for('student.view_enrolled_course') }}">
                     Click to View Enrolled Course </a></button>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if role=='admin' %}
+        <div class="column">
+            <div class="card">
+                <h3>Modify Course Section</h3>
+                <p>Modify Any Course Content</p>
+                <button type="button" class="btn btn-info"><a href="#"> Click to add
+                    course </a>
+                </button>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <h3>Add Course for any trainer</h3>
+                <p>Add Course for Trainer</p>
+                <button type="button" class="btn btn-info"><a href="#"> Click to add
+                    course </a>
+                </button>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <h3>Edit Trainer/Student Details</h3>
+                <p>Edit Trainer, Student UserName, UserEmail, UserPassword</p>
+                <button type="button" class="btn btn-info"><a href="#"> Edit User/Trainer </a>
+                </button>
             </div>
         </div>
         {% endif %}
