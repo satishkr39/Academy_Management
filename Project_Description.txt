@@ -26,6 +26,7 @@ The Application has 3 major components :
     -b- A Student can enroll in a course only once. if they try to enroll in the same course again then throw error.
 
 ========= ADMIN =========
+NOTE : ADMIN Account can be created in DB directly, not from WebApp. 
 3. Each admin can perform the following function
     a. View all users
     b. update any users details

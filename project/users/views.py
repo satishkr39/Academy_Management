@@ -41,7 +41,11 @@ def login():
         username = form.username.data
         password = form.user_password.data
         user = User.query.filter_by(username=username).first()
-        if user is not None and user.validate_password(password):
+        if user is not None and user.validate_password(password) and user.role == 'admin':
+            login_user(user)
+            print("Admin login found")
+            return render_template('welcome.html', role=user.role, user=user.username)
+        elif user is not None and user.validate_password(password):
             login_user(user)
             session.permanent = True
             print("Logged IN")
